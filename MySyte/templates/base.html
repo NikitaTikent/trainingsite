@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+
+<html lang="ru">
+<head>
+    {% load static %}
+    <meta charset="UTF-8">
+    <title>{% block title %}Учебный сайт{% endblock %}</title>
+    {% block stile %} {% endblock %}
+</head>
+
+<header>
+    <a href="{% url 'bboard:index' %}">Главная</a>
+	<a href="{% url 'bboard:index' %}">Объявления</a>
+    <a href="{% url 'blog:index' %}">Статьи</a>
+    <a href="{% url 'galary:index' %}">Галерея</a>
+    <a href="{% url 'bank:index' %}">Карты</a>
+</header>
+
+<body>
+	{% block body %}Тело сайта{% endblock %}
+</body>
+
+</html>

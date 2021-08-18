@@ -1,0 +1,22 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block body %}
+	<div class="BlogMenuBlock" style="float: right; background-color: yellow;">
+    	<a href="{% url 'bboard:add' %}">Добавить</a>
+	    {% if categories %}
+	        {% for categori in categories %}
+	            <p><a href="{% url 'bboard:sorting' categori.id %}">{{categori}}</a>
+	        {% endfor %}
+	    {% endif %}
+	</div>
+    
+	{% if bboard_writes %}
+		{% for bboard_write in bboard_writes %}
+			<h3>{{bboard_write.title}}</h3>
+			<p>Описание:</p>
+			<p>{{bboard_write.description}}</p>
+			<p>Цена: {{bboard_write.coast}}</p>
+		{% endfor %}
+	{% endif %}
+{% endblock %}

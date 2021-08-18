@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+	<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>Добавление объявления : : Доска объявлений</title>
+	</head>
+	<body>
+    	<a href="{% url 'bboard:index' %}">Главная</a>
+		<h1>Добавление объявления</h1>
+		<div>
+			{% for categori in categories %}
+				<a href="{% url 'bboard:sorting' categori.id %}">{{categori}}</a>
+			{% endfor %}
+		</div>
+		<form method='post'>
+			{% csrf_token %}
+			{{ form.as_p }}
+			<input type="submit" value="Добавить">
+		</form>
+	</body>
+</html>

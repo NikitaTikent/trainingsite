@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>Новая статья</title>
+	</head>
+	<body>
+    	<a href="{% url 'bboard:index' %}">Главная</a>
+		<h1>Новая статья</h1>
+		<form method="POST">
+			{% csrf_token %}
+			{{form.as_p}}
+			<input type="submit" value='Добавить'>
+		</form>
+	</body>
+</html>

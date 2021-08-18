@@ -1,0 +1,42 @@
+{% extends 'base.html' %}
+
+{% block body %}
+	{% if users %}
+		{% for user in users %}
+			<p><a href="{% url 'bank:user_cards' user.id %}">{{user.name}}</a></p>
+		{% endfor %}
+	{% endif %}
+
+	{% if user_cards %}
+		{% for card in user_cards %}
+			<p>{{card.number}}</p>
+		{% endfor %}
+	{% endif %}
+
+	{% if form %}
+		<form method="post">
+			{% csrf_token %}
+			{{form.as_p}}
+			<input type="submit" value="Добавить">
+		</form>
+	{% endif %}
+
+
+	{% if cars %}
+		{% for car in cars %}
+			Марка машины: <a href="{% url 'bank:car_details' car.id %}">{{car.name}}</a>
+			<p>цвет машины: {{car.color}}</p>
+			<p>Цена: {{car.coast}}</p>
+		{% endfor %}
+	{% endif %}
+
+	{% if details %}
+		{% for det in details %}
+			<p>Название детали: {{det.name}}</p>
+			<p>Цвет детали: {{det.color}}</p>
+			<p>Цена детали: {{det.coast}}</p>
+		{% endfor %}
+	{% endif %}
+
+
+{% endblock %}

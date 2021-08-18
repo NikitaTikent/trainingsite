@@ -1,0 +1,23 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block body %}
+	{% if results %}
+		{% for result in results %}
+			<h2>Автор: {{result.autor}}</h2>
+			<img src="{{result.photo_url}}">
+			<h6>Дата публикации: {{result.date|date:"d.m.Y"}}</h6>
+		{% endfor %}
+	{% endif %}
+	<form method="post" action="{% url 'galary:add' %}">
+		{% csrf_token %}
+		{{forms.as_p}}
+		<input type="submit" value="Добавить">
+	</form>
+	{% if result_test %}
+		{% for result in result_test %}
+			<p>{{result.kind}}</p>
+			<p>{{result.text}}</p>
+		{% endfor %}
+	{% endif %}
+{% endblock %}
