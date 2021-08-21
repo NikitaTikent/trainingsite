@@ -1,6 +1,7 @@
 from django.shortcuts import render
 from django.views.generic.edit import CreateView
 from django.urls import reverse_lazy
+from django.http import HttpResponseRedirect
 
 from .models import Blog_articles, Blog_comments
 from .forms import BlogForms
@@ -14,12 +15,12 @@ def index(request):
 def article(request, article_id):
 	article = Blog_articles.objects.get(id=article_id)
 	comments = Blog_comments.objects.filter(article=article)
+
+	if request.method == 'POST':
+		Create_new_comment(request)
+		
 	return render(request, 'blog/article.html', {'article':article, 'comments': comments})
 
-def new_comment(request):
-	articles = Blog_articles.objects.all()
-	Create_new_comment(request)
-	return render(request, 'blog/blog.html', {'articles':articles})
 
 
 

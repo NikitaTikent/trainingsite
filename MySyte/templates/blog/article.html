@@ -8,7 +8,7 @@
 		<p>{{article.articles}}</p>
 		<h6>{{article.date}}</h6>
 	{% endif %}
-	<form method="POST" action="{% url 'blog:new_comment' %}">
+	<form method="POST" action="{% url 'blog:article' article.id %}">
 		{% csrf_token %}
 		<input type="hidden" name="article_id" value="{{article.id}}">
 		<input type="text" name="name" placeholder="Имя">
