@@ -1,0 +1,11 @@
+{% extends 'base.html' %}
+
+{% block body %}
+	{% if test_objects %}
+		{% for test_object in test_objects %}
+			<p>{{test_object.name}}
+			<a href="{% url 'classView:test_class' test_object.pk %}">{{test_object.age}}</a>
+			{{test_object.date}}
+		{% endfor %}
+	{% endif %}
+{% endblock %}

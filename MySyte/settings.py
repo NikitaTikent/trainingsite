@@ -30,13 +30,14 @@ SECRET_KEY = 'django-insecure-h13knvmz@)23bj-!!8qsp49svcv1rclze2y1fdc(g0(=*l*^(+
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ["*"]
 
 
 # Application definition
 
 INSTALLED_APPS = [
     'bboard.apps.BboardConfig',
+    'classView.apps.ClassviewConfig',
     'courses.apps.CoursesConfig',
     'Bank.apps.BankConfig',
     'blog.apps.BlogConfig',

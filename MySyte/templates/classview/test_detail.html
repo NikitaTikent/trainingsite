@@ -1,0 +1,14 @@
+{% extends 'base.html' %}
+
+{% block body %}
+	{% if test_objects %}
+		{% for test_object in test_objects %}
+			<p>{{test_object.name}}
+			{{test_object.age}}
+			{{test_object.date}}
+		{% endfor %}
+	{% endif %}
+	
+	{{test.name}}
+
+{% endblock %}
