@@ -17,6 +17,8 @@
 			<p>Описание:</p>
 			<p>{{bboard_write.description}}</p>
 			<p>Цена: {{bboard_write.coast}}</p>
+			<a href="{% url 'bboard:update' bboard_write.pk %}">Изменить</a>
+			<a href="{% url 'bboard:delete' bboard_write.pk %}">Удалить</a>
 		{% endfor %}
 	{% endif %}
 {% endblock %}

@@ -1,7 +1,8 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from django.views.generic.edit import CreateView
 from django.urls import reverse_lazy
 from django.views.generic.detail import DetailView
+from django.views.generic.edit import UpdateView, DeleteView
 
 from .models import Blog_articles, Blog_comments
 from .forms import BlogForms
@@ -43,6 +44,7 @@ class Blog_article(DetailView):
 	"""Для сранения функцции и класса для одного и того же вызова"""
 	model = Blog_articles
 	template_name = 'blog/article.html'	#Можно не использовать, упростил для теста
+	context_object_name = 'article'
 
 	def get_context_data(self, **kwargs):
 		context = super().get_context_data(**kwargs)
@@ -52,3 +54,16 @@ class Blog_article(DetailView):
 
 		return context
 
+
+class Article_update(UpdateView):
+	model = Blog_articles
+	template_name = 'blog/articles_add.html'
+	models_form = BlogForms
+	fields = ('autor', 'title', 'articles')
+	success_url = '/blog/{id}'
+
+
+class Article_delete(DeleteView):
+	model = Blog_articles
+	template_name = 'blog/article_delete.html'
+	success_url = '/blog'

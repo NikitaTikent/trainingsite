@@ -2,23 +2,14 @@
 {% load static %}
 
 {% block body %}
-	{% if blog_articles %}
-		<h1>{{blog_articles.title}}</h1>
-		<h3>{{blog_articles.autor}}</h3>
-		<p>{{blog_articles.articles}}</p>
-		<h6>{{blog_articles.date}}</h6>
-	{% endif %}
-
-
-
-
 	{% if article %}
-		<h1>{{article.title}}</h1>
+		<a href="{% url 'blog:update' article.pk %}"><h1>{{article.title}}</h1></a>
 		<h3>{{article.autor}}</h3>
 		<p>{{article.articles}}</p>
 		<h6>{{article.date}}</h6>
+		<a href="{% url 'blog:delete' article.pk %}">Удалить</a>
 
-		<form method="POST" action="{% url 'blog:article' article.id %}">
+		<form method="POST" action="{% url 'blog:new_comment' article.id %}">
 			{% csrf_token %}
 			<input type="hidden" name="article_id" value="{{article.id}}">
 			<input type="text" name="name" placeholder="Имя">

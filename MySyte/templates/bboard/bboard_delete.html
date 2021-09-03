@@ -1,0 +1,9 @@
+{% extends 'base.html' %}
+
+{% block body %}
+	<h1>Подтвердите удаление</h1>
+	<form method="post">
+		{% csrf_token %}
+		<input type="submit" value="Удалить">
+	</form>
+{% endblock %}

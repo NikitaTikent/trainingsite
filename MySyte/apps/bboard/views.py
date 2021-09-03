@@ -1,7 +1,8 @@
 from django.shortcuts import render
 from .models import Bboard, Bboard_categories
 
-from django.views.generic.edit import CreateView
+
+from django.views.generic.edit import CreateView, UpdateView, DeleteView
 from django.urls import reverse_lazy
 from .forms import BbForm
 
@@ -29,3 +30,28 @@ class BbCreateView(CreateView):
 		context = super().get_context_date(**kwargs)
 		context['categories'] = Bboard_categories.objects.all()
 		return context
+
+
+class Bboard_update(UpdateView):
+	model = Bboard
+	template_name = 'bboard/bboard_edit.html'
+	models_form = BbForm
+	fields = ('title', 'coast', 'description', 'categories')
+	success_url = '/'
+
+	def get_context_data(self, **kwargs):
+		context = super().get_context_data(**kwargs)
+		context['categories'] = Bboard_categories.objects.all()
+		return context
+
+
+class Bboard_delete(DeleteView):
+	model = Bboard
+	success_url = '/'
+	template_name = 'bboard/bboard_delete.html'
+
+	def get_context_data(self, **kwargs):
+		context = super().get_context_data(**kwargs)
+		context['categories'] = Bboard_categories.objects.all()
+		return context
+

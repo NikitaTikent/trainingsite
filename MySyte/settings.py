@@ -37,6 +37,7 @@ ALLOWED_HOSTS = ["*"]
 
 INSTALLED_APPS = [
     'bboard.apps.BboardConfig',
+    'aunthenticated.apps.AunthenticatedConfig',
     'classView.apps.ClassviewConfig',
     'courses.apps.CoursesConfig',
     'Bank.apps.BankConfig',

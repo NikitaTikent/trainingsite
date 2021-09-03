@@ -24,4 +24,5 @@ urlpatterns = [
     path('galary/', include('galary.urls')),
     path('bank/', include('Bank.urls')),
     path('classview/', include('classView.urls')),
+    path('aunthenticated/', include('aunthenticated.urls'))
 ]

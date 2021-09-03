@@ -4,7 +4,7 @@
 {% block body %}
 	{% if results %}
 		{% for result in results %}
-			<h2>Автор: {{result.autor}}</h2>
+			<a href="{% url 'galary:update' result.pk %}"><h2>Автор: {{result.autor}}</h2></a>
 			<img src="{{result.photo_url}}">
 			<h6>Дата публикации: {{result.date|date:"d.m.Y"}}</h6>
 		{% endfor %}
@@ -20,4 +20,5 @@
 			<p>{{result.text}}</p>
 		{% endfor %}
 	{% endif %}
+<a href="{% url 'galary:test' %}">Добавить</a>
 {% endblock %}

@@ -1,0 +1,18 @@
+{% extends 'base.html' %}
+
+{% block body %}
+
+<h1>Курсы</h1>
+	{% if courses %}
+		{% for course in courses %}
+			<p><a href="">{{course.name}}</a></p>
+		{% endfor %}
+	{% endif %}
+<h1>Студенты</h1>
+	{% if students %}
+		{% for student in students %}
+			<p><a href="">{{student.name}}</a></p>
+		{% endfor %}
+	{% endif %}
+
+{% endblock %}
