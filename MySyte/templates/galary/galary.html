@@ -4,21 +4,36 @@
 {% block body %}
 	{% if results %}
 		{% for result in results %}
-			<a href="{% url 'galary:update' result.pk %}"><h2>Автор: {{result.autor}}</h2></a>
-			<img src="{{result.photo_url}}">
-			<h6>Дата публикации: {{result.date|date:"d.m.Y"}}</h6>
+			<h2>Автор: {{result.autor}}</h2>
+			<img src="{{result.photo_url}}" style="max-height: 15vw; max-width: 15vw;">
+			<h6>Дата публикации: {{result.date|date:"SHORT_DATE_FORMAT"}}</h6>
+			<a href="{% url 'galary:update' result.pk %}">Изменить</a>
+			<a href="{% url 'galary:delete' result.pk %}">Удалить</a>
 		{% endfor %}
 	{% endif %}
+	
+	<p>
+	{% if page.number > 1 %}
+		<a href="?page=1">1</a>
+	&nbsp;&nbsp;|&nbsp;&nbsp;
+	{% endif %}
+	{% if page.has_previous %}
+		<a href="?page={{page.previous_page_number}}">&lt;</a>
+	{% endif %}
+	{{page.number}}
+	{% if page.has_next %}
+		<a href="?page={{page.next_page_number}}">&gt;</a>
+	{% endif %}
+	{% if last_page %}
+	&nbsp;&nbsp;|&nbsp;&nbsp;
+		<a href="?page={{last_page}}">{{last_page}}</a>
+	{% endif %}
+
 	<form method="post" action="{% url 'galary:add' %}">
 		{% csrf_token %}
 		{{forms.as_p}}
 		<input type="submit" value="Добавить">
 	</form>
-	{% if result_test %}
-		{% for result in result_test %}
-			<p>{{result.kind}}</p>
-			<p>{{result.text}}</p>
-		{% endfor %}
-	{% endif %}
-<a href="{% url 'galary:test' %}">Добавить</a>
+
+	<a href="{% url 'galary:test' %}">Добавить</a>
 {% endblock %}

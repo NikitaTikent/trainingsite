@@ -5,13 +5,13 @@
 <h1>Курсы</h1>
 	{% if courses %}
 		{% for course in courses %}
-			<p><a href="">{{course.name}}</a></p>
+			<p><a href="{% url 'courses:course_students' course.pk %}">{{course.name}}</a></p>
 		{% endfor %}
 	{% endif %}
 <h1>Студенты</h1>
 	{% if students %}
 		{% for student in students %}
-			<p><a href="">{{student.name}}</a></p>
+			<p><a href="{% url 'courses:student_courses' student.pk %}">{{student.name}}</a></p>
 		{% endfor %}
 	{% endif %}
 

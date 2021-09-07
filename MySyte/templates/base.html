@@ -16,8 +16,13 @@
     <a href="{% url 'bank:index' %}">Карты</a>
     <a href="{% url 'courses:index' %}">Курсы</a>
     <a href="{% url 'classView:index' %}">Тесты</a>
-    <a href="{% url 'aunthenticated:index' %}">Авторизация</a>
-    <a href="{% url 'aunthenticated:logout_user' %}">выход</a>
+    {% if not user.is_authenticated %}
+        <a href="{% url 'aunthenticated:index' %}" style="float: right; margin-right: 5vw">Авторизация</a>
+    {% endif %}
+
+    {% if user.is_authenticated %}
+        <a href="{% url 'aunthenticated:logout_user' %}" style="float: right; margin-right: 5vw">выход</a>
+    {% endif %}
 </header>
 
 <body>

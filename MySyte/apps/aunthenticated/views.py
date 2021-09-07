@@ -5,6 +5,15 @@ from .decorators import unaunthenticated_user
 from .forms import *
 
 
+def new_user(request):
+	form = UserCreationForm
+	if request.method == 'POST':
+		form = CreateUserForm(request.POST)
+		if form.is_valid():
+			user = form.save()
+			#userna
+
+
 @unaunthenticated_user
 def login_page(request):
 	if request.method == 'POST':

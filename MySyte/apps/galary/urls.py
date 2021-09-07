@@ -7,5 +7,6 @@ urlpatterns = [
 	path('', views.index, name='index'),
 	path('add/', views.add, name='add'),
 	path('test', views.Galary_info.as_view(), name='test'),
-	path('update/<int:pk>', views.Calary_update.as_view(), name='update')
+	path('update/<int:pk>', views.Calary_update.as_view(), name='update'),
+	path('delete/<int:pk>', views.Galary_delete.as_view(), name='delete')
 ]

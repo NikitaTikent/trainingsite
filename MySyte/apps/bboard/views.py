@@ -1,17 +1,26 @@
 from django.shortcuts import render
-from .models import Bboard, Bboard_categories
-
-
+from django.core.paginator import Paginator
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
 from django.urls import reverse_lazy
+
+
 from .forms import BbForm
+from .models import Bboard, Bboard_categories
 
 
 def index(request):
 	bboard_writes = Bboard.objects.all()
 	categories = Bboard_categories.objects.all()
-	return render(request, 'bboard/bboard.html', {'bboard_writes': bboard_writes, 
-		'categories': categories})
+	paginator = Paginator(bboard_writes, 2)
+	if 'page' in request.GET:
+		page_num = request.GET['page']
+	else:
+		page_num = 1
+
+	page = paginator.get_page(page_num)
+
+	return render(request, 'bboard/bboard.html', {'bboard_writes': page.object_list, 
+		'categories': categories, 'page': page})
 
 
 def sorting(request, categori_id):
