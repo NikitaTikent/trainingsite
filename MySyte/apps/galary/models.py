@@ -4,6 +4,7 @@ class Galary(models.Model):
 	autor = models.CharField('Имя автора', max_length=100)
 	photo_url = models.TextField('Ссылка на фотографию')
 	date = models.DateTimeField('Дата публикации', auto_now_add=True)
+	order = models.SmallIntegerField(default=0, db_index=True)
 	
 	def __str__(self):
 		return self.autor
@@ -11,6 +12,7 @@ class Galary(models.Model):
 	class Meta:
 		verbose_name = 'Галерея'
 		verbose_name_plural = 'Галерея'
+		ordering = ['order', 'autor']
 
 
 

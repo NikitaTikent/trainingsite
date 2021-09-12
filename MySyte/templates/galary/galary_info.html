@@ -1,9 +1,11 @@
 {% extends 'base.html' %}
 
 {% block body %}
-	<form method="post">
+	<form method="post" action="{% url 'galary:add' %}">
+		<input type="submit" value="Внести изменения">
 		{% csrf_token %}
+		<!-- {{form.autor.label}}: {{form.autor}} -->
 		{{form.as_p}}
-		<input type="submit" value="Добавить">
+		<input type="submit" value="Внести изменения">
 	</form>
 {% endblock %}

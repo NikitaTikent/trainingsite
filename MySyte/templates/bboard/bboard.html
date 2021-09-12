@@ -7,11 +7,12 @@
 	    {% if categories %}
 	        {% for categori in categories %}
 	            <p><a href="{% url 'bboard:sorting' categori.id %}">{{categori}}</a>
+	            	<a href="{% url 'bboard:bboard_and_categories' categori.id %}">Редактирование записей по категории</a>
 	        {% endfor %}
 	    {% endif %}
 	</div>
 
-	<div>
+	<p><div>
 		{% if page.has_previous %}
 			<a href="?page={{page.previous_page_number}}">&lt;</a>
 			&nbsp;&nbsp;|&nbsp;&nbsp;
@@ -22,7 +23,6 @@
 			<a href="?page={{page.next_page_number}}">&gt;</a>
 		{% endif %}
 	</div>
-    
 	{% if bboard_writes %}
 		{% for bboard_write in bboard_writes %}
 			<h3>{{bboard_write.title}}</h3>

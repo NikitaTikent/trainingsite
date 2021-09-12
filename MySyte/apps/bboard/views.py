@@ -1,7 +1,8 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from django.core.paginator import Paginator
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
 from django.urls import reverse_lazy
+from django.forms import inlineformset_factory
 
 
 from .forms import BbForm
@@ -64,3 +65,18 @@ class Bboard_delete(DeleteView):
 		context['categories'] = Bboard_categories.objects.all()
 		return context
 
+
+def bboard_and_categories(request, category_id):
+	bbsc = inlineformset_factory(Bboard_categories, Bboard, form = BbForm, extra=1)
+	category = Bboard_categories.objects.get(id=category_id)
+	if request.method == 'POST':
+		formset = bbsc(request.POST, instance=category)
+		if formset.is_valid():
+			formset.save()
+			return redirect('bboard:index')
+	else:
+		form = bbsc(instance=category)
+	context = {
+		'form': form
+	}
+	return render(request, 'bboard/bboard_create.html', context)
