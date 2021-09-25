@@ -5,12 +5,14 @@ from django.views.generic.detail import DetailView
 from django.views.generic.edit import UpdateView, DeleteView
 
 from .models import Blog_articles, Blog_comments
-from .forms import BlogForms
+from .forms import BlogForms, CommentSearh
 
 
 def index(request):
 	articles = Blog_articles.objects.all()
-	return render(request, 'blog/blog.html', {'articles':articles})
+	context = {'articles':articles}
+
+	return render(request, 'blog/blog.html', context)
 
 
 def article(request, article_id):
@@ -67,3 +69,18 @@ class Article_delete(DeleteView):
 	model = Blog_articles
 	template_name = 'blog/article_delete.html'
 	success_url = '/blog'
+
+
+def comment_searh(request):
+	if request.method == 'POST':
+		scf = CommentSearh(request.POST)
+		if scf.is_valid():
+			keyword = scf.cleaned_data['keyword']
+			article = scf.cleaned_data['article']
+			searh_res = Blog_comments.objects.filter(comment__icontains=keyword, article=article)
+			context = {'searh_res': searh_res}
+	else:
+		searh_form = CommentSearh()
+		context = {'form': searh_form}
+	
+	return render(request, 'blog/comment_searh.html', context)

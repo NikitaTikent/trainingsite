@@ -1,10 +1,15 @@
+from django.contrib.contenttypes.fields import GenericRelation
+
 from django.db import models
+from user.models import Note
 
 class Galary(models.Model):
 	autor = models.CharField('Имя автора', max_length=100)
 	photo_url = models.TextField('Ссылка на фотографию')
 	date = models.DateTimeField('Дата публикации', auto_now_add=True)
 	order = models.SmallIntegerField(default=0, db_index=True)
+
+	note = GenericRelation(Note)
 	
 	def __str__(self):
 		return self.autor

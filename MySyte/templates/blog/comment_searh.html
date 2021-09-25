@@ -1,0 +1,17 @@
+{% extends 'base.html' %}
+
+{% block body %}
+	{% if form %}
+		<form method="post">
+			{% csrf_token %}
+			{{form.as_p}}
+			<input type="submit" value="Поиск">
+		</form>
+	{% endif %}
+	{% if searh_res %}
+		{% for res in searh_res %}
+			<p>{{res.name}}</p>
+			<p>{{res.comment}}</p>
+		{% endfor %}
+	{% endif %}
+{% endblock %}

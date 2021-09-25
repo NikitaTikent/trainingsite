@@ -1,4 +1,5 @@
 from django.db import models
+from datetime import datetime
 
 
 class Bboard_categories(models.Model):
@@ -24,3 +25,20 @@ class Bboard(models.Model):
 	class Meta:
 		verbose_name = 'Объявление'
 		verbose_name_plural = 'Объявления'
+
+
+def get_src_img(instance, filename):
+	return '%d%s'%(datetime.now().timestamp(), filename)
+
+
+class Img(models.Model):
+	img = models.ImageField(upload_to=get_src_img, verbose_name='Изображение')
+	description = models.TextField(verbose_name='Описание')
+
+	def delete(self, *args, **kwargs):
+		self.img.delete(save=False)
+		super().delete(*args, **kwargs)
+
+	class Meta:
+		verbose_name = 'Изображение'
+		verbose_name_plural = 'Изображения'

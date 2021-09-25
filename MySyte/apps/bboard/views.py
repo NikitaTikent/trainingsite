@@ -5,8 +5,8 @@ from django.urls import reverse_lazy
 from django.forms import inlineformset_factory
 
 
-from .forms import BbForm
-from .models import Bboard, Bboard_categories
+from .forms import BbForm, SearhForm, ImgForm
+from .models import Bboard, Bboard_categories, Img
 
 
 def index(request):
@@ -80,3 +80,47 @@ def bboard_and_categories(request, category_id):
 		'form': form
 	}
 	return render(request, 'bboard/bboard_create.html', context)
+
+
+def bboard_searh(request):
+	if request.method == 'POST':
+		form = SearhForm(request.POST)
+		if form.is_valid():
+			description = form.cleaned_data['description']
+			category = form.cleaned_data['category'].pk
+			searh_res = Bboard.objects.filter(description__icontains=description,
+				categories=category)
+			if len(searh_res) < 1:
+				searh_res = 'None'
+			context = {'result': searh_res}
+		else:
+			context = {'form': form}
+
+		return render(request, 'bboard/searh_bboard.html', context)
+	else:
+		form = SearhForm()
+		context = {'form': form}
+		return render(request, 'bboard/searh_bboard.html', context)
+
+
+def add_img(request):
+	if request.method == 'POST':
+		form = ImgForm(request.POST, request.FILES)
+		if form.is_valid():
+			form.save()
+			return redirect('bboard:index')
+		else:
+			return render(request, 'bboard/add_img.html', {'forms': form})
+	else:
+		forms = ImgForm()
+		images = Img.objects.all()
+
+		context = {'forms': forms, 'images': images}
+		return render(request, 'bboard/add_img.html', context)
+
+
+def delete_img(request, img_pk):
+	write = Img.objects.get(pk=img_pk)
+	write.delete()
+	return redirect('bboard:add_img')
+

@@ -1,0 +1,24 @@
+{% extends 'base.html' %}
+
+{% block body %}
+	{% if form %}
+		<form method="post">
+			{% csrf_token %}
+			{{form.as_p}}
+			<input type="submit" value="Поиск">
+		</form>
+	{% endif %}
+
+	{% if result %}
+		{% if result == 'None' %}
+			<p>Записей не найдено
+		{% else %}
+			{% for res in result %}
+				<p>Название: {{res.title}}
+				<p>Цена: {{res.coast}}
+				<p>Описание: {{res.description}}
+			{% endfor %}
+		{% endif %}
+	{% endif %}
+
+{% endblock %}

@@ -16,6 +16,13 @@ class Blog_articles(models.Model):
 		verbose_name_plural = 'Статьи'
 
 
+class articles_autor(Blog_articles):
+	"""Сортировка по автору"""
+
+	class Meta:
+		proxy = True
+		ordering = ['-autor']
+
 class Blog_comments(models.Model):
 	"""Комментарии к статье"""
 	name = models.CharField('Имя автора', max_length=100)

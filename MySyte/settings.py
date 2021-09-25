@@ -36,6 +36,8 @@ ALLOWED_HOSTS = ["*"]
 # Application definition
 
 INSTALLED_APPS = [
+    'captcha',
+    'user.apps.UserConfig',
     'bboard.apps.BboardConfig',
     'aunthenticated.apps.AunthenticatedConfig',
     'classView.apps.ClassviewConfig',
@@ -92,6 +94,7 @@ DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3',
         'NAME': BASE_DIR / 'db.sqlite3',
+        'ATOMIC_REQUEST': True,
     }
 }
 
@@ -145,3 +148,7 @@ STATICFILES_DIRS = [
     'UralR/static',
 ]
 STATIC_ROOT = os.path.join(BASE_DIR, "static")
+
+
+MEDIA_ROOT = os.path.join(BASE_DIR, "media")
+MEDIA_URL = '/media/'

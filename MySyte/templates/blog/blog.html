@@ -2,8 +2,16 @@
 {% load static %}
 
 {% block body %}
-	<div class="BlogMenuBlock" style="float: right; background-color: yellow;">
-		<a href="{% url 'blog:add_article' %}">Добавить статью</a>
+	{% if user.username %}
+		<p>Добро пожаловать! {{user.username}}
+	{% endif %}
+
+	<div class="BlogMenuBlock" style="float: right; 
+		background-color: yellow; 
+		clear: both; margin-right: 5vw;">
+		{% if 'blog.add_blog_articles' in perms %}
+			<a href="{% url 'blog:add_article' %}">Добавить статью</a>
+		{% endif %}
 	</div>
 	{% if articles %}
 		{% for article in articles %}

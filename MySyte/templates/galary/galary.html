@@ -24,7 +24,7 @@
 	{% if page.has_next %}
 		<a href="?page={{page.next_page_number}}">&gt;</a>
 	{% endif %}
-	{% if last_page %}
+	{% if page.number < last_page %}
 	&nbsp;&nbsp;|&nbsp;&nbsp;
 		<a href="?page={{last_page}}">{{last_page}}</a>
 	{% endif %}

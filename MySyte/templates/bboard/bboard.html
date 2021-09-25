@@ -1,7 +1,15 @@
 {% extends 'base.html' %}
 {% load static %}
+{% load filtersandtags %}
 
 {% block body %}
+	<p>
+		<a href="{% url 'bboard:add_img' %}">Добавить изображение</a>
+	</p>
+	<p>
+		<a href="{% url 'bboard:searh' %}">Поиск объявления</a>
+	</p>
+
 	<div class="BlogMenuBlock" style="float: right; background-color: yellow;">
     	<a href="{% url 'bboard:add' %}">Добавить</a>
 	    {% if categories %}
@@ -28,7 +36,8 @@
 			<h3>{{bboard_write.title}}</h3>
 			<p>Описание:</p>
 			<p>{{bboard_write.description|slice:"80"}}</p>
-			<p>Цена: {{bboard_write.coast|floatformat:-2}}</p>
+			<p>Цена: {{bboard_write.coast|floatformat:-2}} руб.</p>
+			<p>Цена(test my filter): {{bboard_write.coast|cur}}</p>
 			<a href="{% url 'bboard:update' bboard_write.pk %}">Изменить</a>
 			<a href="{% url 'bboard:delete' bboard_write.pk %}">Удалить</a>
 		{% endfor %}

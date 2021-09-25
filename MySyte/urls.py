@@ -15,8 +15,13 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path, include
+from django.conf import settings
+
+from django.conf.urls.static import static
+from django.contrib.auth.views import PasswordChangeView
 
 urlpatterns = [
+    path('captcha/', include('captcha.urls')),
     path('admin/', admin.site.urls),
     path('', include('bboard.urls')),
     path('courses/', include('courses.urls')),
@@ -24,5 +29,10 @@ urlpatterns = [
     path('galary/', include('galary.urls')),
     path('bank/', include('Bank.urls')),
     path('classview/', include('classView.urls')),
-    path('aunthenticated/', include('aunthenticated.urls'))
+    path('aunthenticated/', include('aunthenticated.urls')),
+    path('account/changepassword/', PasswordChangeView.as_view(
+        template_name='changepassword.html',
+        success_url='/'), name='passwordchange')
 ]
+
+urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

@@ -1,0 +1,23 @@
+{% extends 'base.html' %}
+
+{% block body %}
+
+	{% if forms %}
+		<form method="post" enctype="multipart/form-data">
+			{% csrf_token %}
+			{{forms.as_p}}
+			<input type="submit" value="Добавить">
+		</form>
+	{% endif %}
+
+	{% if images %}
+		{% for img in images %}
+			<p><img src="{{img.img.url}}" style="width: 5vw; height: 5vw;">
+			<p>Описание: {{img.description}}
+			<p>Скачать: <a href="{{img.img.url}}">Скачать</a>
+			<p>Удалить: <a href="{% url 'bboard:delete_img' img.pk %}">Удалить</a>
+		{% endfor %}
+	{% endif %}
+
+
+{% endblock %}

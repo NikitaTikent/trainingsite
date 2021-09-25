@@ -21,7 +21,14 @@
     {% endif %}
 
     {% if user.is_authenticated %}
-        <a href="{% url 'aunthenticated:logout_user' %}" style="float: right; margin-right: 5vw">выход</a>
+        <div style="float: right; margin-right: 5vw">
+            <p>{{user.username}}
+            {% if user.username == 'admin' %}
+                <p><a href="/admin">Админка</a>
+            {% endif %}
+            <p><a href="{% url 'aunthenticated:logout_user' %}">выход</a>
+            <p><a href="{% url 'passwordchange' %}">Смена пароля</a>
+        </div>
     {% endif %}
 </header>
 
